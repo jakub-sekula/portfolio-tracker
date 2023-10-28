@@ -51,7 +51,7 @@ for transaction in share_transactions:
             Transaction(
                 type="Withdrawal (share purchase)",
                 ticker=transaction.ticker,
-                total=float(transaction.total),
+                total=transaction.total - transaction.fee,
                 date=transaction.date,
             )
         )
@@ -60,7 +60,7 @@ for transaction in share_transactions:
             Transaction(
                 type="Deposit (share sale)",
                 ticker=transaction.ticker,
-                total=-float(transaction.total),
+                total=-transaction.total + transaction.fee,
                 date=transaction.date,
             )
         )
@@ -69,7 +69,7 @@ for transaction in share_transactions:
             Transaction(
                 type="Fee",
                 ticker=transaction.ticker,
-                total=float(transaction.fee),
+                total=transaction.fee,
                 date=transaction.date,
             )
         )
@@ -93,7 +93,7 @@ for transaction in all_transactions:
     dupes.append(transaction)
     print(transaction.id)
 
-# all_transactions = unique_transactions
+all_transactions = unique_transactions
 
 for dupe in dupes:
     pprint(vars(dupe))

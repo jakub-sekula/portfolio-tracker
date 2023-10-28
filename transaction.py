@@ -115,14 +115,6 @@ class Transaction:
         self.share_price = 1.0
         self.share_amount = self.total
 
-    def calculate_total_in_source_currency(self):
-        if self.share_price and self.share_amount:
-            self.total_source_currency = round(
-                float(self.share_price) * float(self.share_amount), 2
-            )
-        else:
-            self.total_source_currency = None
-
     def compute_id(self):
         data = f"{self.date}-{self.ticker}-{self.total}-{self.type}-{self.share_amount}-{self.share_price}-{self.action}-{self.original_ticker}"
         self.unencoded = data
